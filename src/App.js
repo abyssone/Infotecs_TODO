@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <SideBar />
+      <SideBar noteList={noteStorage}/>
       <input plaseholder='Title' value={note.title} onChange={(e) => setNote({...note, title: e.target.value})} />
       <input plaseholder='Desc' value={note.desc} onChange={(e) => setNote({...note, desc: e.target.value})} />
       <p><button onClick={() => addToNoteStorage(note)}>Save</button></p>
