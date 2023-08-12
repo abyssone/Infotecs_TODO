@@ -3,3 +3,59 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+html, body, .app {
+    width: 100dvw;
+    height: 100dvh;
+}
+
+.app {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+/************************************ SIDEBAR *****************************************/
+
+.side-bar {
+    min-width: 300px;
+    padding: 5px 5px 5px 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 5px;
+
+    border-right: 1px solid #646464;
+    overflow-y: scroll;
+}
+
+.note {
+    padding: 15px 20px;
+
+    border-radius: .5em;
+    border: 1px solid red;
+}
+
+.note_header {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.note_desc {
+
+}
+
+/************************************ MAIN *****************************************/
+
+.main {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

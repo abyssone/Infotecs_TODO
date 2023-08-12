@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import CreatingNote from "./Main/CreatingNote.jsx";
 
-const Main = function() {
-    
+const Main = function({create, ...props}) {
 
-    return (<div>
-
-    </div>);
+    return (
+        <CreatingNote create={create}/>
+    );
 }
 
 export default Main;
