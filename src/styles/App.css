@@ -2,8 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 400;
+    font-size: 18px;
 }
 
 html, body, .app {
@@ -18,11 +20,19 @@ html, body, .app {
     align-items: stretch;
 }
 
+h1 {
+    font-size: 30px;
+}
+
+hr {
+    width: 100%;
+}
+
 /************************************ SIDEBAR *****************************************/
 
 .side-bar {
     min-width: 300px;
-    padding: 5px 5px 5px 10px;
+    padding: 30px 5px 5px 20px;
 
     display: flex;
     flex-direction: column;
@@ -38,17 +48,22 @@ html, body, .app {
     padding: 15px 20px;
 
     border-radius: .5em;
-    border: 1px solid red;
+
+    cursor: default;
 }
 
 .note_header {
     font-size: 24px;
     font-weight: 600;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
 }
 
 .note_desc {
-
+    font-size: 16px;
 }
 
 /************************************ MAIN *****************************************/
@@ -58,6 +73,17 @@ html, body, .app {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 30px 20px 0 20px;
+}
+
+.main > div {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
 }

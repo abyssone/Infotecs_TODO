@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Button from "../UI/Button/Button";
+import Input from "../UI/Input/Input"
 
 const CreatingNote = function({create, ...props}) {
 
@@ -7,17 +9,17 @@ const CreatingNote = function({create, ...props}) {
      const [note, setNote] = useState({
         title: '', 
         desc: '', 
-        endData: (() => new Date().toLocaleDateString().split('.').reverse().join('-'))(),
-        startData: (() => new Date().toLocaleDateString().split('.').reverse().join('-'))()
+        endDate: (() => new Date().toLocaleDateString().split('.').reverse().join('-'))(),
+        startDate: (() => new Date().toLocaleDateString().split('.').reverse().join('-'))()
     });
         
 
-    return (<div className="main">
+    return (<div>
         <h1>Добавление TODO</h1>
-        <input placeholder='Title' value={note.title} onChange={(e) => setNote({...note, title: e.target.value})} />
-        <input placeholder='Desc' value={note.desc} onChange={(e) => setNote({...note, desc: e.target.value})} />
-        <input type="date" value={note.endData} onChange={(e) => setNote({...note, endData: e.target.value})}/>
-        <p><button onClick={() => create(note)}>Save</button></p>
+        <Input placeholder='Title' value={note.title} onChange={(e) => setNote({...note, title: e.target.value})} />
+        <Input placeholder='Desc' value={note.desc} onChange={(e) => setNote({...note, desc: e.target.value})} />
+        <Input type="date" value={note.endData} onChange={(e) => setNote({...note, endData: e.target.value})}/>
+        <p><Button onClick={() => create(note)}>Save</Button></p>
     </div>);
 }
 

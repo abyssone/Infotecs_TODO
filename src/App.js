@@ -15,18 +15,33 @@ function App() {
   // Переключение на вкладку информации о записи
   // Проверка на undefined, чтобы не срабатывало на стадии mount
   useEffect(() => {if(selectedNote) setMainScreen('info')}, [selectedNote]);
-  useEffect(() => {console.log(noteStorage)}, [noteStorage]);
 
   // ID использует время в милисекундах для избежания коллизий
   // при удалении старых записей и длину массива для избежания
   // коллизий при одновременном добавлении записей
   function addToNoteStorage(note) {
-    setNoteStorage(prev => [...prev, {...note, id: new Date().getTime() + prev.length}]);
+    setNoteStorage(prev => [...prev, {...note, 
+                                         id: new Date().getTime() + prev.length, 
+                                         status: 'pending'}]);
+  }
+
+  function changeNoteFromStorage(note) {
+    setNoteStorage(prev => prev.map(el => {
+      if(el.id === note.id) {
+        return note;
+      } return el;
+    }));
+    setSelectedNote(note);
+  }
+
+  function deleteNoteFromStorage(noteId) {
+    setNoteStorage(prev => prev.filter(el => el.id !== noteId));
   }
 
   // Хранит записи, заголовок которых содержит значение поисковой строки
   const filteredNotes = useMemo(() => {
-    if(noteStorage) return noteStorage.filter(note => note.title.includes(searchField));
+    console.log(noteStorage);
+    if(noteStorage.length !== 0) return noteStorage.filter(note => note.title.includes(searchField));
   }, [searchField, noteStorage]);
 
   return (
@@ -36,7 +51,11 @@ function App() {
         selectScreen={setMainScreen}
         search={searchField}
         setSearch={setSearchField}/>
-      <Main create={addToNoteStorage} screen={mainScreen} noteInfo={selectedNote}/>
+      <Main create={addToNoteStorage} 
+        screen={mainScreen} 
+        noteInfo={selectedNote}
+        change={changeNoteFromStorage}
+        delete={deleteNoteFromStorage}/>        
     </div>
   );
 }
