@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../UI/Button/Button";
 import Input from "../UI/Input/Input"
 
@@ -11,14 +11,14 @@ const CreatingNote = function({create, ...props}) {
         desc: '', 
         endDate: (() => new Date().toLocaleDateString().split('.').reverse().join('-'))(),
         startDate: (() => new Date().toLocaleDateString().split('.').reverse().join('-'))()
-    });
-        
+    });        
 
     return (<div>
         <h1>Добавление TODO</h1>
-        <Input placeholder='Title' value={note.title} onChange={(e) => setNote({...note, title: e.target.value})} />
-        <Input placeholder='Desc' value={note.desc} onChange={(e) => setNote({...note, desc: e.target.value})} />
-        <Input type="date" value={note.endData} onChange={(e) => setNote({...note, endData: e.target.value})}/>
+        <hr />
+        <Input placeholder='Заголовок' value={note.title} onChange={(e) => setNote({...note, title: e.target.value})} />
+        <Input placeholder='Описание' value={note.desc} onChange={(e) => setNote({...note, desc: e.target.value})} />
+        <Input type="date" value={note.endDate} onChange={(e) => setNote({...note, endDate: e.target.value})}/>
         <p><Button onClick={() => create(note)}>Save</Button></p>
     </div>);
 }

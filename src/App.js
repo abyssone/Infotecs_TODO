@@ -2,16 +2,18 @@ import React, { useEffect, useMemo, useState } from 'react';
 import SideBar from './components/SideBar.jsx';
 import './styles/App.css'
 import Main from './components/Main.jsx';
+import useLocalStorage from './hooks/useLocalStorage.js';
 
 function App() {
 
-  // Все TODO хранятся в виде масива объектов типа {title, desc}
-  const [noteStorage, setNoteStorage] = useState([]);
+  // Все TODO хранятся в виде масива объектов в localStorage
+  // структуру объекта можно посмотреть там же, создав любое TODO  
+  const [noteStorage, setNoteStorage] = useLocalStorage([], 'todos');
   // Состояние для текущего отображаемого окна компонента Main
   const [selectedNote, setSelectedNote] = useState();
   const [mainScreen, setMainScreen] = useState('add');  
   const [searchField, setSearchField] = useState('');
-
+ 
   // Переключение на вкладку информации о записи
   // Проверка на undefined, чтобы не срабатывало на стадии mount
   useEffect(() => {if(selectedNote) setMainScreen('info')}, [selectedNote]);
@@ -40,7 +42,6 @@ function App() {
 
   // Хранит записи, заголовок которых содержит значение поисковой строки
   const filteredNotes = useMemo(() => {
-    console.log(noteStorage);
     if(noteStorage.length !== 0) return noteStorage.filter(note => note.title.includes(searchField));
   }, [searchField, noteStorage]);
 
@@ -52,7 +53,8 @@ function App() {
         search={searchField}
         setSearch={setSearchField}/>
       <Main create={addToNoteStorage} 
-        screen={mainScreen} 
+        screen={mainScreen}
+        selectScreen={setMainScreen} 
         noteInfo={selectedNote}
         change={changeNoteFromStorage}
         delete={deleteNoteFromStorage}/>        
