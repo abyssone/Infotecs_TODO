@@ -9,7 +9,11 @@ const SideBar = function({noteList, selectNote, selectScreen, search, setSearch,
         <Button onClick={() => selectScreen('add')}>Добавить</Button>
         <Input placeholder="Поиск" value={search} onChange={(e) => setSearch(e.target.value)}/>
         {(noteList != null && noteList.length !== 0) 
-            ? noteList.map(note => <Note key={note.id} select={selectNote} noteInfo ={note}/>)
+            ? noteList.map(note => 
+                <Note key={note.id} 
+                selectScreen={selectScreen} 
+                select={selectNote} 
+                noteInfo ={note}/>)
             : <h1 style={{fontSize: '20px', textAlign: 'center'}}>Записей нет</h1>
         }
     </div>);

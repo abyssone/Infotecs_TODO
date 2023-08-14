@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CreatingNote from "./Main/CreatingNote.jsx";
 import NoteInfo from "./Main/NoteInfo.jsx";
 import EditingNote from "./Main/EditingNote.jsx";
