@@ -9,8 +9,11 @@ function App() {
   // Все TODO хранятся в виде масива объектов в localStorage
   // структуру объекта можно посмотреть там же, создав любое TODO  
   const [noteStorage, setNoteStorage] = useLocalStorage([], 'todos');
-  // Состояние для текущего отображаемого окна компонента Main
+
+  // Текущая запись с которой происходят все взаимодействия
   const [selectedNote, setSelectedNote] = useState();
+
+  // Состояние для текущего отображаемого окна компонента Main
   const [mainScreen, setMainScreen] = useState('add');  
   const [searchField, setSearchField] = useState('');
  
@@ -22,9 +25,11 @@ function App() {
   // при удалении старых записей и длину массива для избежания
   // коллизий при одновременном добавлении записей
   function addToNoteStorage(note) {
-    setNoteStorage(prev => [...prev, {...note, 
-                                         id: new Date().getTime() + prev.length, 
-                                         status: 'pending'}]);
+    const creatingNote = {...note, 
+      id: new Date().getTime() + noteStorage.length, 
+      status: 'pending'};
+    setNoteStorage(prev => [...prev, creatingNote]);
+    setSelectedNote(creatingNote);
   }
 
   function changeNoteFromStorage(note) {
@@ -43,7 +48,7 @@ function App() {
   // Хранит записи, заголовок которых содержит значение поисковой строки
   const filteredNotes = useMemo(() => {
     if(noteStorage.length !== 0) return noteStorage.filter(note => note.title.includes(searchField));
-  }, [searchField, noteStorage]);
+  }, [searchField, noteStorage]); 
 
   return (
     <div className='app'>

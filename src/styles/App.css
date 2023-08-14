@@ -28,6 +28,22 @@ hr {
     width: 100%;
 }
 
+textarea {
+    padding: 5px 10px;
+    border-radius: .4em;
+    border: 1px solid #818181;
+    transition: all .1s ease-out 0s;
+    outline: none;
+
+    width: 100%;
+    height: 50%;
+    resize: none;
+}
+
+textarea:focus {    
+    box-shadow: 0 0 3px black;
+}
+
 /************************************ SIDEBAR *****************************************/
 
 .side-bar {
@@ -85,5 +101,10 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 15px;
+}
+
+.buttons-line {
+    display: flex;
     gap: 15px;
 }

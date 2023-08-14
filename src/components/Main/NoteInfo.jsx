@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../UI/Button/Button";
 
 const NoteInfo = function({note, change, selectScreen,  ...props}) {
@@ -6,8 +6,10 @@ const NoteInfo = function({note, change, selectScreen,  ...props}) {
     return (<div>
         <h1>{note.title}</h1>
         <hr />
-        <p>{note.desc}</p>
-        <p>
+        <div style={{whiteSpace: 'pre-line'}}>{note.desc}</div>
+        <p>Создано: {note.startDate}</p>
+        <p>До: {note.endDate}</p>
+        <p className="buttons-line"> 
             {
                 note.status === 'pending'
                 ? <Button onClick={() => change({...note, status: 'in-progress'})}>Начать</Button>

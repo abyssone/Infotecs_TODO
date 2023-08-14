@@ -12,10 +12,10 @@ const EditingNote = function({noteInfo, change, selectScreen,  ...props}) {
     return (<div>
         <h1>Редактировать</h1>
         <hr />
-        <Input placeholder='Заголовок' value={note.title} onChange={(e) => setNote({...note, title: e.target.value})} />
-        <Input placeholder='Описание' value={note.desc} onChange={(e) => setNote({...note, desc: e.target.value})} />
+        <Input style={{width: '100%'}} placeholder='Заголовок' value={note.title} onChange={(e) => setNote({...note, title: e.target.value})} />
+        <textarea cols="30" rows="10" value={note.desc} onChange={(e) => setNote({...note, desc: e.target.value})}></textarea>
         <Input type="date" value={note.endDate} onChange={(e) => setNote({...note, endDate: e.target.value})}/>
-        <p>
+        <p className="buttons-line">
             <Button onClick={() => change({...noteInfo,
                 title: note.title,
                 desc: note.desc,
