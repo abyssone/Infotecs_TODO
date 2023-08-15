@@ -3,6 +3,7 @@ import SideBar from './components/SideBar.jsx';
 import './styles/App.css'
 import Main from './components/Main.jsx';
 import useLocalStorage from './hooks/useLocalStorage.js';
+import useResize from './hooks/useResize.js';
 
 function App() {
 
@@ -16,7 +17,11 @@ function App() {
   // Состояние для текущего отображаемого окна компонента Main
   const [mainScreen, setMainScreen] = useState('add');  
   const [searchField, setSearchField] = useState('');
+  const [isActive, setActive, width, resize] = useResize(305);
  
+  const sideContainerSize = useMemo(() => {
+    return {width: `${width}px`};
+  }, [width]);
   // Переключение на вкладку информации о записи
   // Проверка на undefined, чтобы не срабатывало на стадии mount
   useEffect(() => {if(selectedNote) setMainScreen('info')}, [selectedNote]);
@@ -51,12 +56,18 @@ function App() {
   }, [searchField, noteStorage]); 
 
   return (
-    <div className='app'>
-      <SideBar noteList={filteredNotes}
-        selectNote={setSelectedNote} 
-        selectScreen={setMainScreen}
-        search={searchField}
-        setSearch={setSearchField}/>
+    <div className='app' 
+      onMouseMove={isActive ? resize : null} 
+      onMouseUp={() => setActive(false)}
+      onMouseLeave={() => setActive(false)}>
+      <div className='side-container' style={sideContainerSize}>
+        <SideBar noteList={filteredNotes}
+          selectNote={setSelectedNote} 
+          selectScreen={setMainScreen}
+          search={searchField}
+          setSearch={setSearchField}/>
+        <div className='dragger' onMouseDown={() => setActive(true)}></div>
+      </div>      
       <Main create={addToNoteStorage} 
         screen={mainScreen}
         selectScreen={setMainScreen} 
